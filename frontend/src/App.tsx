@@ -1,21 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Login } from "./pages/Login";
-import { Newsfeed } from "./pages/Newsfeed";
-import { Register } from "./pages/Register";
+import { isAuthenticated } from "./utils/authUtils";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Newsfeed />,
-    },
-    {
-        path: "/login",
-        element: <Login />,
-    },
-    {
-        path: "/register",
-        element: <Register />,
-    },
+    isAuthenticated ? PrivateRoute() : {},
+    ...PublicRoute(),
 ]);
 
 const App = () => {
